@@ -10,15 +10,13 @@ import { InstagramIcon, CatalogIcon, WhatsAppIcon, GoogleIcon, StarIcon, Locatio
 type ModalType = 'whatsapp' | 'rating' | 'feedback' | 'catalogList' | 'catalogDetail' | 'catalogForm' | 'location' | null;
 
 const App: React.FC = () => {
-  const [quoteIndex, setQuoteIndex] = useState(0);
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [rating, setRating] = useState(0);
-  const [isLogoSpinning, setIsLogoSpinning] = useState(false);
   
   // General Contact Form State
   const [whatsappName, setWhatsappName] = useState('');
   const [whatsappAge, setWhatsappAge] = useState('');
-  const [whatsappSize, setWhatsappSize] = useState('');
+  const [whatsappSize, setWhatsappSize] = useState<string[]>([]);
   const [whatsappQuery, setWhatsappQuery] = useState('');
 
   // Catalog State
@@ -28,20 +26,7 @@ const App: React.FC = () => {
   const [catalogFormSize, setCatalogFormSize] = useState('');
   const [catalogFormPayment, setCatalogFormPayment] = useState<string[]>([]);
   const [catalogFormNotes, setCatalogFormNotes] = useState('');
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setQuoteIndex((prevIndex) => (prevIndex + 1) % QUOTES.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
   
-  const handleLogoClick = () => {
-    if (isLogoSpinning) return;
-    setIsLogoSpinning(true);
-    setTimeout(() => setIsLogoSpinning(false), 1500);
-  };
-
   const handleRatingSubmit = (rate: number) => {
     setRating(rate);
     if (rate === 5) {
@@ -55,20 +40,28 @@ const App: React.FC = () => {
   const resetWhatsappForm = () => {
       setWhatsappName('');
       setWhatsappAge('');
-      setWhatsappSize('');
+      setWhatsappSize([]);
       setWhatsappQuery('');
   }
 
   const handleWhatsAppSubmit = () => {
     const message = `Olá! Meu nome é ${whatsappName}.
 Idade: ${whatsappAge}.
-Tamanho de roupa: ${whatsappSize || 'Não informado'}.
+Tamanho de roupa: ${whatsappSize.length > 0 ? whatsappSize.join(', ') : 'Não informado'}.
 Estou buscando o seguinte: ${whatsappQuery}`;
     const encodedMessage = encodeURIComponent(message);
     const phoneNumber = '554299195235';
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
     setActiveModal(null);
     resetWhatsappForm();
+  };
+  
+  const handleWhatsappSizeChange = (size: string) => {
+    setWhatsappSize(prev =>
+      prev.includes(size)
+        ? prev.filter(s => s !== size)
+        : [...prev, size]
+    );
   };
 
   const handleCatalogInquirySubmit = () => {
@@ -139,19 +132,12 @@ ${catalogFormNotes || 'Nenhuma'}
               className="absolute inset-0 w-full h-full object-cover opacity-[0.03] pointer-events-none"
             />
             <header className="relative flex flex-col items-center text-center">
-              <img 
-                src="/logo.png" 
-                alt="Moda&CIA Logo" 
-                className={`w-28 h-28 sm:w-32 sm:h-32 rounded-full mb-4 cursor-pointer ${isLogoSpinning ? 'animate-spin-coin' : ''}`} 
-                onClick={handleLogoClick}
-                style={{ perspective: '1000px' }}
-              />
-              <h1 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-gray-200 via-white to-gray-400 bg-clip-text text-transparent animate-gradient">
+              <h1 className="text-6xl sm:text-7xl font-extrabold bg-gradient-to-r from-gray-200 via-white to-gray-400 bg-clip-text text-transparent animate-gradient mb-2">
                 Moda&CIA
               </h1>
-              <div className="h-12 sm:h-14 mt-2 flex items-center justify-center">
-                 <p key={quoteIndex} className="text-sm sm:text-base text-gray-300 transition-opacity duration-1000 animate-fade-in px-4">
-                  "{QUOTES[quoteIndex]}"
+              <div className="h-12 sm:h-14 mt-4 flex items-center justify-center">
+                 <p className="text-lg sm:text-xl text-gray-200 font-medium tracking-wider px-4">
+                  {QUOTES[0]}
                 </p>
               </div>
             </header>
@@ -186,7 +172,22 @@ ${catalogFormNotes || 'Nenhuma'}
         <div className="mt-6 space-y-4 text-left">
            <div className="rounded-lg p-px bg-animated-border focus-within:shadow-lg focus-within:shadow-stone-500/40 transition-shadow duration-300"><input type="text" placeholder="Seu nome" value={whatsappName} onChange={e => setWhatsappName(e.target.value)} className="w-full bg-stone-800/50 border-none rounded-[7px] px-4 py-2 text-white placeholder-stone-400 focus:outline-none" /></div>
            <div className="rounded-lg p-px bg-animated-border focus-within:shadow-lg focus-within:shadow-stone-500/40 transition-shadow duration-300"><input type="text" placeholder="Sua idade" value={whatsappAge} onChange={e => setWhatsappAge(e.target.value)} className="w-full bg-stone-800/50 border-none rounded-[7px] px-4 py-2 text-white placeholder-stone-400 focus:outline-none" /></div>
-           <div className="rounded-lg p-px bg-animated-border focus-within:shadow-lg focus-within:shadow-stone-500/40 transition-shadow duration-300"><input type="text" placeholder="Seu tamanho de roupa (opcional)" value={whatsappSize} onChange={e => setWhatsappSize(e.target.value)} className="w-full bg-stone-800/50 border-none rounded-[7px] px-4 py-2 text-white placeholder-stone-400 focus:outline-none" /></div>
+           <div>
+              <label className="text-sm font-medium text-stone-300">Tamanho de roupa (opcional):</label>
+              <div className="flex flex-wrap gap-x-4 gap-y-2 mt-2">
+                  {['PP', 'P', 'M', 'G', 'GG'].map(size => (
+                      <label key={size} className="flex items-center space-x-2 text-white text-sm cursor-pointer">
+                          <input
+                              type="checkbox"
+                              checked={whatsappSize.includes(size)}
+                              onChange={() => handleWhatsappSizeChange(size)}
+                              className="form-checkbox h-4 w-4 rounded bg-stone-700 border-stone-600 text-stone-500 focus:ring-stone-500"
+                          />
+                          <span>{size}</span>
+                      </label>
+                  ))}
+              </div>
+            </div>
            <div className="rounded-lg p-px bg-animated-border focus-within:shadow-lg focus-within:shadow-stone-500/40 transition-shadow duration-300"><textarea placeholder="O que está buscando? (Ex: Vi algo no Instagram, busco vestidos, etc.)" value={whatsappQuery} onChange={e => setWhatsappQuery(e.target.value)} rows={3} className="w-full bg-stone-800/50 border-none rounded-[7px] px-4 py-2 text-white placeholder-stone-400 focus:outline-none resize-none"></textarea></div>
         </div>
         <button onClick={handleWhatsAppSubmit} className="mt-6 w-full bg-gradient-to-r from-stone-500 via-stone-600 to-stone-700 animate-gradient text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-stone-500/40 transform hover:scale-105 flex items-center justify-center gap-2">Enviar para WhatsApp <WhatsAppIcon className="h-5 w-5"/></button>

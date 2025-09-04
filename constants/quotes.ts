@@ -1,22 +1,3 @@
 export const QUOTES: string[] = [
-    "O Senhor é o meu pastor; de nada terei falta. (Salmos 23:1)",
-    "Tudo o que fizerem, façam de todo o coração, como para o Senhor. (Colossenses 3:23)",
-    "O coração do homem planeja o seu caminho, mas o Senhor lhe dirige os passos. (Provérbios 16:9)",
-    "A beleza é enganosa, e a formosura é passageira; mas a mulher que teme ao Senhor será elogiada. (Provérbios 31:30)",
-    "Entrega o teu caminho ao Senhor; confia nele, e ele tudo fará. (Salmos 37:5)",
-    "O temor do Senhor é o princípio da sabedoria. (Provérbios 9:10)",
-    "Deus é o nosso refúgio e fortaleza, socorro bem presente na angústia. (Salmos 46:1)",
-    "Vistam-se de toda a armadura de Deus. (Efésios 6:11)",
-    "Acima de tudo, guarde o seu coração, pois dele depende toda a sua vida. (Provérbios 4:23)",
-    "O choro pode durar uma noite, mas a alegria vem pela manhã. (Salmos 30:5)",
-    "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor. (Jeremias 29:11)",
-    "O Senhor te abençoe e te guarde. (Números 6:24)",
-    "Ainda que eu ande pelo vale da sombra da morte, não temerei mal algum. (Salmos 23:4)",
-    "A fé é a certeza daquilo que esperamos e a prova das coisas que não vemos. (Hebreus 11:1)",
-    "O amor é paciente, o amor é bondoso. (1 Coríntios 13:4)",
-    "Consagre ao Senhor tudo o que você faz, e os seus planos serão bem-sucedidos. (Provérbios 16:3)",
-    "Pois onde estiver o seu tesouro, aí também estará o seu coração. (Mateus 6:21)",
-    "Os que confiam no Senhor são como o monte Sião, que não se abala, firme para sempre. (Salmos 125:1)",
-    "Tudo posso naquele que me fortalece. (Filipenses 4:13)",
-    "A resposta branda desvia o furor, mas a palavra dura suscita a ira. (Provérbios 15:1)"
+    "Seu look, seu presente, sua loja!",
 ];
