@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moda&CIA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes gradient-animation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient-animation 15s ease infinite;
+      }
+      .bg-animated-border {
+        background: linear-gradient(60deg, #6b4f3a, #d1c7be, #6b4f3a, #d1c7be, #6b4f3a);
+        background-size: 300% 300%;
+        animation: gradient-animation 8s ease infinite;
+      }
+      @keyframes spin-coin {
+        from { transform: rotateY(0deg); }
+        to { transform: rotateY(1080deg); }
+      }
+      .animate-spin-coin {
+        animation: spin-coin 1.5s ease-out;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
+  }
+}
+</script>
+</head>
+  <body class="bg-black">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
