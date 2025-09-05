@@ -3,9 +3,10 @@ import { ChevronLeftIcon, ChevronRightIcon } from './Icons';
 
 interface ImageSliderProps {
   images: string[];
+  theme: 'dark' | 'light';
 }
 
-const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
+const ImageSlider: React.FC<ImageSliderProps> = ({ images, theme }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -19,6 +20,10 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
+
+  const dotBaseClasses = 'w-2 h-2 rounded-full transition-all duration-300';
+  const activeDotClasses = theme === 'dark' ? 'bg-white scale-125' : 'bg-black scale-125';
+  const inactiveDotClasses = theme === 'dark' ? 'bg-white/50' : 'bg-black/40';
 
   return (
     <div className="relative w-full h-64 rounded-lg overflow-hidden">
@@ -48,8 +53,8 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
         {images.map((_, index) => (
           <div
             key={index}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentIndex === index ? 'bg-white scale-125' : 'bg-white/50'
+            className={`${dotBaseClasses} ${
+              currentIndex === index ? activeDotClasses : inactiveDotClasses
             }`}
           ></div>
         ))}

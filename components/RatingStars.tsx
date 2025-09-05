@@ -4,9 +4,10 @@ import { StarIcon as StarSolid } from './Icons';
 
 interface RatingStarsProps {
   onRate: (rating: number) => void;
+  theme: 'dark' | 'light';
 }
 
-const RatingStars: React.FC<RatingStarsProps> = ({ onRate }) => {
+const RatingStars: React.FC<RatingStarsProps> = ({ onRate, theme }) => {
   const [hoverRating, setHoverRating] = useState(0);
   const [currentRating, setCurrentRating] = useState(0);
 
@@ -14,6 +15,8 @@ const RatingStars: React.FC<RatingStarsProps> = ({ onRate }) => {
     setCurrentRating(rating);
     onRate(rating);
   };
+
+  const inactiveStarColor = theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400';
 
   return (
     <div className="flex space-x-2">
@@ -27,7 +30,7 @@ const RatingStars: React.FC<RatingStarsProps> = ({ onRate }) => {
         >
           <StarSolid
             className={`w-8 h-8 sm:w-10 sm:h-10 cursor-pointer transition-all duration-200 transform hover:scale-125 ${
-              (hoverRating || currentRating) >= star ? 'text-yellow-400' : 'text-neutral-600'
+              (hoverRating || currentRating) >= star ? 'text-yellow-400' : inactiveStarColor
             }`}
           />
         </button>

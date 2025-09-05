@@ -4,9 +4,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  theme: 'dark' | 'light';
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, theme }) => {
   if (!isOpen) return null;
 
   return (
@@ -19,7 +20,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         onClick={(e) => e.stopPropagation()}
         style={{ animation: 'scale-in 0.3s forwards' }}
       >
-        <div className="bg-neutral-900/80 backdrop-blur-xl rounded-[15px] p-6 text-white">
+        <div className={`rounded-[15px] p-6 ${theme === 'dark' ? 'bg-neutral-900/80 backdrop-blur-xl text-white' : 'bg-white/95 backdrop-blur-2xl text-black'}`}>
           {children}
         </div>
       </div>
