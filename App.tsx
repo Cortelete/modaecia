@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { QUOTES } from './constants/quotes';
 import { CATALOG_ITEMS, CatalogItem } from './constants/catalogItems';
@@ -13,7 +14,7 @@ type Theme = 'dark' | 'light';
 const App: React.FC = () => {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [rating, setRating] = useState(0);
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>('light');
 
   // Coin State
   const [isFlipping, setIsFlipping] = useState(false);
