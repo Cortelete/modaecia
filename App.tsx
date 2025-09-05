@@ -151,7 +151,7 @@ ${catalogFormNotes || 'Nenhuma'}
               className="absolute inset-0 w-full h-full object-cover opacity-[0.03] pointer-events-none"
             />
             <header className="relative flex flex-col items-center text-center">
-              <div className="flex justify-center mb-4">
+              <div className="flex justify-center mb-6">
                 <div
                     className="coin-wrapper"
                     onClick={handleCoinClick}
@@ -172,7 +172,7 @@ ${catalogFormNotes || 'Nenhuma'}
                 </div>
               </div>
 
-              <img src="/logo.png" alt="Logotipo Moda&CIA" className="h-24 sm:h-28 mx-auto" />
+              <img src="/logo.png" alt="Logotipo Moda&CIA" className="h-20 sm:h-24 mx-auto" />
 
               <div className="h-12 sm:h-14 mt-4 flex items-center justify-center">
                  <p className="text-lg sm:text-xl font-bold tracking-wider px-4 animate-silver-text">
