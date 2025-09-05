@@ -172,7 +172,7 @@ ${catalogFormNotes || 'Nenhuma'}
                 </div>
               </div>
 
-              <img src="/logo.png" alt="Logotipo Moda&CIA" className="h-28 sm:h-32 mx-auto" />
+              <img src="/logo.png" alt="Logotipo Moda&CIA" className="h-24 sm:h-28 mx-auto" />
 
               <div className="h-12 sm:h-14 mt-4 flex items-center justify-center">
                  <p className="text-lg sm:text-xl font-bold tracking-wider px-4 animate-silver-text">
