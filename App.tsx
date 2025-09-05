@@ -159,7 +159,7 @@ ${catalogFormNotes || 'Nenhuma'}
                     aria-label="Jogue a moeda da sorte"
                     tabIndex={0}
                 >
-                    <div className="coin w-28 h-28" style={{ transform: `rotateY(${rotation}deg)` }}>
+                    <div className="coin w-32 h-32" style={{ transform: `rotateY(${rotation}deg)` }}>
                         {/* Front Face */}
                         <div className="coin-face w-full h-full rounded-full">
                            <img src="/moeda.png" alt="Moeda da Sorte - Cara" className="w-full h-full rounded-full object-cover" />
