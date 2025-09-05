@@ -15,11 +15,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       onClick={onClose}
     >
       <div 
-        className="rounded-2xl p-px bg-animated-border shadow-2xl shadow-stone-800/20 w-full max-w-sm transform transition-all duration-300 ease-out scale-95 opacity-0 animate-scale-in"
+        className="rounded-2xl p-px bg-animated-border shadow-2xl shadow-neutral-800/20 w-full max-w-sm transform transition-all duration-300 ease-out scale-95 opacity-0 animate-scale-in"
         onClick={(e) => e.stopPropagation()}
         style={{ animation: 'scale-in 0.3s forwards' }}
       >
-        <div className="bg-stone-900/80 backdrop-blur-xl rounded-[15px] p-6 text-white">
+        <div className="bg-neutral-900/80 backdrop-blur-xl rounded-[15px] p-6 text-white">
           {children}
         </div>
       </div>

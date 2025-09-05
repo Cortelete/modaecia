@@ -27,7 +27,7 @@ const RatingStars: React.FC<RatingStarsProps> = ({ onRate }) => {
         >
           <StarSolid
             className={`w-8 h-8 sm:w-10 sm:h-10 cursor-pointer transition-all duration-200 transform hover:scale-125 ${
-              (hoverRating || currentRating) >= star ? 'text-yellow-400' : 'text-stone-600'
+              (hoverRating || currentRating) >= star ? 'text-yellow-400' : 'text-neutral-600'
             }`}
           />
         </button>

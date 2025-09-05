@@ -17,16 +17,55 @@
         animation: gradient-animation 15s ease infinite;
       }
       .bg-animated-border {
-        background: linear-gradient(60deg, #6b4f3a, #d1c7be, #6b4f3a, #d1c7be, #6b4f3a);
+        background: linear-gradient(60deg, #1a1a1a, #4a4a4a, #101010, #2a2a2a, #1a1a1a);
         background-size: 300% 300%;
         animation: gradient-animation 8s ease infinite;
       }
-      @keyframes spin-coin {
-        from { transform: rotateY(0deg); }
-        to { transform: rotateY(1080deg); }
+      
+      .animate-silver-text {
+        background: linear-gradient(90deg, #d1d5db, #ffffff, #9ca3af, #d1d5db);
+        background-size: 250% 250%;
+        animation: gradient-animation 6s ease infinite;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
       }
-      .animate-spin-coin {
-        animation: spin-coin 1.5s ease-out;
+
+      /* Wavy Background Animation */
+      @keyframes move-waves {
+        0% { background-position-x: 0; }
+        100% { background-position-x: 100px; }
+      }
+      .wavy-background {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='20'%3E%3Cpath d='M0 10 C 25 0, 75 20, 100 10' stroke='rgba(255,255,255,0.1)' fill='none' stroke-width='0.5'/%3E%3C/svg%3E");
+        animation: move-waves 10s linear infinite;
+      }
+
+      /* Coin Flip Animation */
+      .coin-wrapper {
+        perspective: 1000px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+      }
+      .coin {
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 1.2s cubic-bezier(0.6, -0.28, 0.74, 1.28);
+      }
+      .coin-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden; /* Safari */
+      }
+      .coin-back {
+        transform: rotateY(180deg);
       }
     </style>
   <script type="importmap">
