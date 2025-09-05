@@ -14,7 +14,7 @@ type Theme = 'dark' | 'light';
 const App: React.FC = () => {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [rating, setRating] = useState(0);
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>('dark');
 
   // Coin State
   const [isFlipping, setIsFlipping] = useState(false);
@@ -147,10 +147,10 @@ ${catalogFormNotes || 'Nenhuma'}
   const subTextColor = theme === 'dark' ? 'text-gray-400' : 'text-gray-600';
   const mainButtonBaseClasses = `w-full font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2`;
   const mainButtonThemeClasses = theme === 'dark' 
-    ? 'bg-gradient-to-r from-neutral-800 via-neutral-900 to-black text-white hover:shadow-lg hover:shadow-gray-400/40' 
-    : 'shadow-lg shadow-black/15 animate-light-marble text-black hover:shadow-xl hover:shadow-black/20';
+    ? 'shadow-lg shadow-black/15 animate-light-marble text-black hover:shadow-xl hover:shadow-black/20'
+    : 'bg-neutral-900 text-white hover:bg-neutral-800 hover:shadow-lg hover:shadow-gray-500/40';
   
-  const secondaryButtonBg = theme === 'dark' ? 'bg-neutral-700 hover:bg-neutral-600' : 'shadow-md shadow-black/10 bg-white/50 backdrop-blur-sm text-black hover:bg-white/70';
+  const secondaryButtonBg = theme === 'dark' ? 'shadow-md shadow-black/10 bg-white/50 backdrop-blur-sm text-black hover:bg-white/70' : 'bg-neutral-800 hover:bg-neutral-700';
   
   const inputBg = theme === 'dark' ? 'bg-neutral-800/50' : 'bg-white/95 backdrop-blur-sm shadow-inner shadow-black/5';
   const placeholderColor = theme === 'dark' ? 'placeholder-neutral-400' : 'placeholder-neutral-400';
@@ -160,8 +160,8 @@ ${catalogFormNotes || 'Nenhuma'}
 
   const checkboxClasses = theme === 'dark' ? 'form-checkbox h-4 w-4 rounded bg-neutral-700 border-neutral-600 text-gray-400 focus:ring-gray-400' : 'form-checkbox h-4 w-4 rounded bg-white border-gray-300 text-gray-800 focus:ring-gray-800';
   const footerLinkThemeClasses = theme === 'dark'
-    ? 'animate-silver-text bg-neutral-900/80 hover:shadow-lg hover:shadow-gray-400/40'
-    : `text-black shadow-lg shadow-black/15 animate-light-marble hover:shadow-xl hover:shadow-black/20`;
+    ? `text-black shadow-lg shadow-black/15 animate-light-marble hover:shadow-xl hover:shadow-black/20`
+    : 'animate-silver-text bg-neutral-900/90 hover:shadow-lg hover:shadow-gray-500/40';
 
   return (
     <div className="relative min-h-screen w-full bg-black flex flex-col items-center justify-between p-4 sm:p-6 font-sans">

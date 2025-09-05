@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface LinkButtonProps {
@@ -12,15 +13,15 @@ const LinkButton: React.FC<LinkButtonProps> = ({ href, onClick, text, icon, them
   const baseClasses = `group w-full rounded-xl flex items-center p-3 sm:p-4 transition-all duration-300 transform hover:scale-105`;
   
   const themeClasses = theme === 'dark' 
-    ? "bg-neutral-900/80 backdrop-blur-sm text-white hover:shadow-lg hover:shadow-gray-400/40" 
-    : "animate-light-marble backdrop-blur-xl text-black shadow-lg shadow-black/15 hover:shadow-xl hover:shadow-black/20";
+    ? "animate-light-marble backdrop-blur-xl text-black shadow-lg shadow-black/15 hover:shadow-xl hover:shadow-black/20"
+    : "bg-neutral-900 text-white hover:bg-neutral-800 hover:shadow-lg hover:shadow-gray-500/40";
   
   const combinedClasses = `${baseClasses} ${themeClasses}`;
 
   const iconBaseClasses = "flex-shrink-0 w-8 h-8 flex items-center justify-center transition-colors duration-300";
   const iconThemeClasses = theme === 'dark'
-    ? "text-neutral-300 group-hover:text-white"
-    : "text-gray-600 group-hover:text-black";
+    ? "text-neutral-800 group-hover:text-black"
+    : "text-neutral-300 group-hover:text-white";
   const iconClasses = `${iconBaseClasses} ${iconThemeClasses}`;
 
   const content = (
