@@ -5,6 +5,7 @@ import LinkButton from './components/LinkButton';
 import Modal from './components/Modal';
 import RatingStars from './components/RatingStars';
 import ImageSlider from './components/ImageSlider';
+import FullscreenImageSlider from './components/FullscreenImageSlider';
 import { InstagramIcon, CatalogIcon, WhatsAppIcon, GoogleIcon, StarIcon, LocationIcon, SunIcon, MoonIcon } from './components/Icons';
 
 type ModalType = 'whatsapp' | 'rating' | 'feedback' | 'catalogList' | 'catalogDetail' | 'catalogForm' | 'location' | null;
@@ -32,6 +33,18 @@ const App: React.FC = () => {
   const [catalogFormSize, setCatalogFormSize] = useState('');
   const [catalogFormPayment, setCatalogFormPayment] = useState<string[]>([]);
   const [catalogFormNotes, setCatalogFormNotes] = useState('');
+  
+  // Fullscreen Slider State
+  const [fullscreenSlider, setFullscreenSlider] = useState<{ images: string[]; index: number } | null>(null);
+
+  const openFullscreenSlider = (images: string[], index: number) => {
+    setFullscreenSlider({ images, index });
+  };
+
+  const closeFullscreenSlider = () => {
+    setFullscreenSlider(null);
+  };
+
 
   const toggleTheme = () => {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
@@ -286,7 +299,11 @@ ${catalogFormNotes || 'Nenhuma'}
 
       {selectedItem && (
         <Modal isOpen={activeModal === 'catalogDetail'} onClose={() => setActiveModal('catalogList')} theme={theme}>
-          <ImageSlider images={selectedItem.images} theme={theme} />
+          <ImageSlider 
+            images={selectedItem.images} 
+            theme={theme} 
+            onImageClick={(index) => openFullscreenSlider(selectedItem.images, index)}
+          />
           <h3 className={`text-xl font-bold mt-4 ${animatedTextClass}`}>{selectedItem.name}</h3>
           <p className={`text-lg font-semibold mt-1 ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'}`}>{selectedItem.price}</p>
           <p className={`text-sm mt-2 h-20 overflow-y-auto ${subTextColor}`}>{selectedItem.description}</p>
@@ -320,6 +337,15 @@ ${catalogFormNotes || 'Nenhuma'}
           </div>
           <button onClick={handleCatalogInquirySubmit} className={`mt-6 ${mainButtonBaseClasses} ${mainButtonThemeClasses}`}>Enviar Interesse <WhatsAppIcon className="h-5 w-5"/></button>
         </Modal>
+      )}
+
+      {fullscreenSlider && (
+        <FullscreenImageSlider 
+          images={fullscreenSlider.images} 
+          initialIndex={fullscreenSlider.index} 
+          onClose={closeFullscreenSlider} 
+          theme={theme}
+        />
       )}
     </div>
   );

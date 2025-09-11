@@ -4,21 +4,30 @@ import { ChevronLeftIcon, ChevronRightIcon } from './Icons';
 interface ImageSliderProps {
   images: string[];
   theme: 'dark' | 'light';
+  onImageClick?: (index: number) => void;
 }
 
-const ImageSlider: React.FC<ImageSliderProps> = ({ images, theme }) => {
+const ImageSlider: React.FC<ImageSliderProps> = ({ images, theme, onImageClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const goToPrevious = () => {
+  const goToPrevious = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
-  const goToNext = () => {
+  const goToNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const isLastSlide = currentIndex === images.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
+  };
+
+  const handleImageClick = () => {
+    if (onImageClick) {
+      onImageClick(currentIndex);
+    }
   };
 
   const dotBaseClasses = 'w-2 h-2 rounded-full transition-all duration-300';
@@ -26,9 +35,12 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images, theme }) => {
   const inactiveDotClasses = theme === 'dark' ? 'bg-white/50' : 'bg-black/40';
 
   return (
-    <div className="relative w-full h-64 rounded-lg overflow-hidden">
+    <div
+      className="relative w-full h-64 rounded-lg overflow-hidden"
+      onClick={handleImageClick}
+    >
       <div
-        className="w-full h-full bg-cover bg-center transition-transform duration-500 ease-in-out"
+        className={`w-full h-full bg-cover bg-center transition-transform duration-500 ease-in-out ${onImageClick ? 'cursor-pointer' : ''}`}
         style={{ backgroundImage: `url(${images[currentIndex]})` }}
       ></div>
       {images.length > 1 && (
