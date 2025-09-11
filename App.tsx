@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { QUOTES } from './constants/quotes';
 import { CATALOG_ITEMS, CatalogItem } from './constants/catalogItems';
@@ -173,8 +172,6 @@ ${catalogFormNotes || 'Nenhuma'}
              <button onClick={toggleTheme} className={`absolute top-4 right-4 p-2 rounded-full transition-colors duration-300 ${theme === 'dark' ? 'text-gray-300 hover:bg-white/10' : 'text-gray-600 hover:bg-black/10'}`} aria-label="Mudar tema">
                 {theme === 'light' ? <SunIcon className="w-6 h-6" /> : <MoonIcon className="w-6 h-6" />}
              </button>
-             
-            {theme === 'dark' && <img src="/logo1.png" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-[0.03] pointer-events-none" />}
             
             <header className="relative flex flex-col items-center text-center">
               <div className="flex justify-center mb-6">
