@@ -294,7 +294,7 @@ ${catalogFormNotes || 'Nenhuma'}
         <div className="text-center">
           <LocationIcon className={`mx-auto h-10 w-10 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`} />
           <h3 className={`mt-2 text-2xl font-bold ${animatedTextClass}`}>Nossa Localização</h3>
-          <p className={`mt-1 text-sm ${subTextColor}`}>R. Saldanha Marinho, 1120 - Centro, Ponta Grossa - PR</p>
+          <p className={`mt-1 text-sm ${subTextColor}`}>R. Teixeira Mendes, 781 - Uvaranas, Ponta Grossa - PR, 84031-000</p>
         </div>
         <div className="mt-4 overflow-hidden rounded-lg">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.2122134209644!2d-50.12247002462161!3d-25.09467677777703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e81b1caef6852b%3A0xf3f4bb525ea12974!2sModa%20e%20Cia!5e0!3m2!1spt-BR!2sbr!4v1756956674877!5m2!1spt-BR!2sbr" width="100%" height="250" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
