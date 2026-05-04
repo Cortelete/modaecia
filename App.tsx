@@ -25,7 +25,7 @@ const App: React.FC = () => {
   const [whatsappName, setWhatsappName] = useState('');
   const [whatsappAge, setWhatsappAge] = useState('');
   const [whatsappSize, setWhatsappSize] = useState<string[]>([]);
-  const [whatsappQuery, setWhatsappQuery] = useState('');
+  const [whatsappInterests, setWhatsappInterests] = useState<string[]>([]);
 
   // Catalog State
   const [selectedItem, setSelectedItem] = useState<CatalogItem | null>(null);
@@ -77,14 +77,13 @@ const App: React.FC = () => {
       setWhatsappName('');
       setWhatsappAge('');
       setWhatsappSize([]);
-      setWhatsappQuery('');
+      setWhatsappInterests([]);
   }
 
   const handleWhatsAppSubmit = () => {
-    const message = `Olá! Meu nome é ${whatsappName}.
-Idade: ${whatsappAge}.
-Tamanho de roupa: ${whatsappSize.length > 0 ? whatsappSize.join(', ') : 'Não informado'}.
-Estou buscando o seguinte: ${whatsappQuery}`;
+    const isFashionSelected = whatsappInterests.includes('Moda feminina');
+    const sizeText = isFashionSelected ? `\nTamanho que geralmente uso: ${whatsappSize.length > 0 ? whatsappSize.join(', ') : 'Não informado'}.` : '';
+    const message = `Olá equipe Moda&CIA! 🌟\nMeu nome é ${whatsappName}, tenho ${whatsappAge} anos e gostaria do atendimento de vocês!\nEstou buscando: ${whatsappInterests.length > 0 ? whatsappInterests.join(', ') : 'Roupas em geral'}.${sizeText}\nPodem me ajudar? 🥰`;
     const encodedMessage = encodeURIComponent(message);
     const phoneNumber = '554299195235';
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
@@ -97,6 +96,14 @@ Estou buscando o seguinte: ${whatsappQuery}`;
       prev.includes(size)
         ? prev.filter(s => s !== size)
         : [...prev, size]
+    );
+  };
+
+  const handleWhatsappInterestChange = (interest: string) => {
+    setWhatsappInterests(prev =>
+      prev.includes(interest)
+        ? prev.filter(i => i !== interest)
+        : [...prev, interest]
     );
   };
 
@@ -181,35 +188,35 @@ ${catalogFormNotes || 'Nenhuma'}
       <div className="wavy-background"></div>
       
       <main className="w-full max-w-md mx-auto flex flex-col items-center justify-center flex-grow z-10">
-        <div className="w-full rounded-3xl p-px bg-animated-border shadow-2xl shadow-neutral-800/20">
-          <div className={`relative overflow-hidden w-full h-full rounded-[23px] p-6 sm:p-8 ${theme === 'dark' ? 'bg-black/40 backdrop-blur-lg text-white' : 'animate-light-marble text-black'}`}>
-             <img src="/outubrorosa.png" alt="Outubro Rosa" className="absolute top-4 left-4 w-12 h-12 object-contain pointer-events-none z-20" />
+        <div className="w-full rounded-3xl p-px bg-animated-border shadow-2xl shadow-neutral-800/20 transform scale-[0.98] sm:scale-100 origin-top">
+          <div className={`relative overflow-hidden w-full h-full rounded-[23px] p-5 sm:p-8 ${theme === 'dark' ? 'bg-black/40 backdrop-blur-lg text-white' : 'animate-light-marble text-black'}`}>
+             <img src="/outubrorosa.png" alt="Outubro Rosa" className="absolute top-4 left-4 w-10 h-10 sm:w-12 sm:h-12 object-contain pointer-events-none z-20" />
              <button onClick={toggleTheme} className={`absolute top-4 right-4 p-2 rounded-full transition-colors duration-300 ${theme === 'dark' ? 'text-gray-300 hover:bg-white/10' : 'text-gray-600 hover:bg-black/10'}`} aria-label="Mudar tema">
                 {theme === 'light' ? <SunIcon className="w-6 h-6" /> : <MoonIcon className="w-6 h-6" />}
              </button>
             
-            <header className="relative flex flex-col items-center text-center">
-              <div className="flex justify-center mb-6">
+            <header className="relative flex flex-col items-center text-center mt-2 sm:mt-0">
+              <div className="flex justify-center mb-4 sm:mb-6">
                 <div className="coin-wrapper" onClick={handleCoinClick} role="button" aria-label="Jogue a moeda da sorte" tabIndex={0}>
-                    <div className="coin w-32 h-32" style={{ transform: `rotateY(${rotation}deg)` }}>
+                    <div className="coin w-24 h-24 sm:w-32 sm:h-32" style={{ transform: `rotateY(${rotation}deg)` }}>
                         <div className="coin-face w-full h-full rounded-full"><img src="/moeda.png" alt="Moeda da Sorte - Cara" className="w-full h-full rounded-full object-cover" /></div>
                         <div className="coin-face coin-back w-full h-full rounded-full"><img src="/moeda.png" alt="Moeda da Sorte - Coroa" className="w-full h-full rounded-full object-cover" /></div>
                     </div>
                 </div>
               </div>
 
-              <img src={theme === 'dark' ? "/logo.png" : "/logo2.png"} alt="Logotipo Moda&CIA" className="h-20 sm:h-24 mx-auto py-1" />
+              <img src={theme === 'dark' ? "/logo.png" : "/logo2.png"} alt="Logotipo Moda&CIA" className="h-16 sm:h-24 mx-auto py-1" />
 
-              <div className="h-12 sm:h-14 mt-4 flex items-center justify-center">
-                 <p className={`text-lg sm:text-xl font-bold tracking-wider px-4 ${animatedTextClass}`}>
+              <div className="h-10 sm:h-14 mt-2 sm:mt-4 flex items-center justify-center">
+                 <p className={`text-base sm:text-xl font-bold tracking-wider px-2 sm:px-4 ${animatedTextClass}`}>
                   {QUOTES[0]}
                 </p>
               </div>
             </header>
 
-            <section className="relative mt-6 sm:mt-8 space-y-4">
+            <section className="relative mt-4 sm:mt-8 space-y-3 sm:space-y-4">
               <LinkButton theme={theme} href="https://www.instagram.com/moda.cia.pg/" text="Instagram" icon={<InstagramIcon />} />
-              <LinkButton theme={theme} onClick={() => setActiveModal('catalogList')} text="Catálogo" icon={<CatalogIcon />} />
+              {/* <LinkButton theme={theme} onClick={() => setActiveModal('catalogList')} text="Catálogo" icon={<CatalogIcon />} /> */}
               <LinkButton theme={theme} onClick={() => setActiveModal('whatsapp')} text="Contato" icon={<WhatsAppIcon />} />
               <LinkButton theme={theme} onClick={() => setActiveModal('location')} text="Localização" icon={<LocationIcon />} />
               <LinkButton theme={theme} onClick={() => setActiveModal('rating')} text="Avalie nossa loja" icon={<GoogleIcon />} />
@@ -218,11 +225,11 @@ ${catalogFormNotes || 'Nenhuma'}
         </div>
       </main>
 
-      <footer className="w-full max-w-md mx-auto text-center text-sm mt-8 pb-4 z-10">
-         <a href={developerWhatsAppUrl} target="_blank" rel="noopener noreferrer" className={`group inline-flex items-center justify-center gap-3 w-full sm:w-auto px-6 py-3 font-bold rounded-full transition-all duration-300 transform hover:scale-105 mb-4 ${footerLinkThemeClasses}`}>
+      <footer className="w-full max-w-md mx-auto text-center mt-8 pb-4 z-10">
+         <a href={developerWhatsAppUrl} target="_blank" rel="noopener noreferrer" className={`group inline-flex items-center justify-center gap-1.5 sm:gap-2 w-[90%] sm:w-auto px-3 sm:px-4 py-2 sm:py-3 text-[11px] sm:text-xs font-bold rounded-full transition-all duration-300 transform hover:scale-105 mb-4 ${footerLinkThemeClasses} whitespace-nowrap overflow-hidden text-ellipsis`}>
             Quer um site incrível como esse? Fale comigo! 🚀
          </a>
-        <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-300'}`}>Desenvolvido por <a href="https://www.instagram.com/inteligenciarte.ia" target="_blank" rel="noopener noreferrer" className={`font-semibold ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-gray-200 hover:text-white'} transition-colors`}>InteligenciArte.IA ✨</a></p>
+        <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-300'}`}>Desenvolvido por <a href="https://www.instagram.com/inteligenciarte.ia" target="_blank" rel="noopener noreferrer" className={`font-semibold ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-gray-200 hover:text-white'} transition-colors`}>InteligenciArte.IA ✨</a></p>
       </footer>
       
       <Modal isOpen={activeModal === 'whatsapp'} onClose={() => { setActiveModal(null); resetWhatsappForm(); }} theme={theme}>
@@ -235,6 +242,18 @@ ${catalogFormNotes || 'Nenhuma'}
            <input type="text" placeholder="Seu nome" value={whatsappName} onChange={e => setWhatsappName(e.target.value)} className={inputClasses} />
            <input type="text" placeholder="Sua idade" value={whatsappAge} onChange={e => setWhatsappAge(e.target.value)} className={inputClasses} />
            <div>
+              <label className={`text-sm font-medium ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'}`}>O que está buscando?</label>
+              <div className="flex flex-wrap gap-x-4 gap-y-2 mt-2 mb-2">
+                  {['Moda feminina', 'Bijuteria', 'Maquiagem', 'Chocolates', 'Perfumaria'].map(interest => (
+                      <label key={interest} className={`flex items-center space-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'} text-sm cursor-pointer`}>
+                          <input type="checkbox" checked={whatsappInterests.includes(interest)} onChange={() => handleWhatsappInterestChange(interest)} className={checkboxClasses} />
+                          <span>{interest}</span>
+                      </label>
+                  ))}
+              </div>
+            </div>
+           {whatsappInterests.includes('Moda feminina') && (
+            <div>
               <label className={`text-sm font-medium ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'}`}>Tamanho de roupa (opcional):</label>
               <div className="flex flex-wrap gap-x-4 gap-y-2 mt-2">
                   {['PP', 'P', 'M', 'G', 'GG'].map(size => (
@@ -245,7 +264,7 @@ ${catalogFormNotes || 'Nenhuma'}
                   ))}
               </div>
             </div>
-           <textarea placeholder="O que está buscando?" value={whatsappQuery} onChange={e => setWhatsappQuery(e.target.value)} rows={3} className={`${inputClasses} resize-none`}></textarea>
+           )}
         </div>
         <button onClick={handleWhatsAppSubmit} className={`mt-6 ${mainButtonBaseClasses} ${mainButtonThemeClasses}`}>Enviar para WhatsApp <WhatsAppIcon className="h-5 w-5"/></button>
       </Modal>
