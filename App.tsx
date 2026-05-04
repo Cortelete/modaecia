@@ -82,8 +82,19 @@ const App: React.FC = () => {
 
   const handleWhatsAppSubmit = () => {
     const isFashionSelected = whatsappInterests.includes('Moda feminina');
-    const sizeText = isFashionSelected ? `\nTamanho que geralmente uso: ${whatsappSize.length > 0 ? whatsappSize.join(', ') : 'Não informado'}.` : '';
-    const message = `Olá equipe Moda&CIA! 🌟\nMeu nome é ${whatsappName}, tenho ${whatsappAge} anos e gostaria do atendimento de vocês!\nEstou buscando: ${whatsappInterests.length > 0 ? whatsappInterests.join(', ') : 'Roupas em geral'}.${sizeText}\nPodem me ajudar? 🥰`;
+    const sizeText = isFashionSelected ? `\n- *Tamanho:* ${whatsappSize.length > 0 ? whatsappSize.join(', ') : 'Não informado'}` : '';
+    const message = `Olá, equipe Moda&CIA.
+
+Gostaria de um atendimento personalizado.
+
+*Meus Dados:*
+- *Nome:* ${whatsappName || 'Não informado'}
+- *Idade:* ${whatsappAge || 'Não informado'}
+
+*Meus Interesses:*
+- *Buscando:* ${whatsappInterests.length > 0 ? whatsappInterests.join(', ') : 'Atendimento geral'}${sizeText}
+
+Aguardo o retorno. Obrigado(a)!`;
     const encodedMessage = encodeURIComponent(message);
     const phoneNumber = '554299195235';
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
