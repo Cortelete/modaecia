@@ -190,7 +190,6 @@ ${catalogFormNotes || 'Nenhuma'}
       <main className="w-full max-w-md mx-auto flex flex-col items-center justify-center flex-grow z-10">
         <div className="w-full rounded-3xl p-px bg-animated-border shadow-2xl shadow-neutral-800/20 transform scale-[0.98] sm:scale-100 origin-top">
           <div className={`relative overflow-hidden w-full h-full rounded-[23px] p-5 sm:p-8 ${theme === 'dark' ? 'bg-black/40 backdrop-blur-lg text-white' : 'animate-light-marble text-black'}`}>
-             <img src="/outubrorosa.png" alt="Outubro Rosa" className="absolute top-4 left-4 w-10 h-10 sm:w-12 sm:h-12 object-contain pointer-events-none z-20" />
              <button onClick={toggleTheme} className={`absolute top-4 right-4 p-2 rounded-full transition-colors duration-300 ${theme === 'dark' ? 'text-gray-300 hover:bg-white/10' : 'text-gray-600 hover:bg-black/10'}`} aria-label="Mudar tema">
                 {theme === 'light' ? <SunIcon className="w-6 h-6" /> : <MoonIcon className="w-6 h-6" />}
              </button>
